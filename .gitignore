@@ -1,0 +1,22 @@
+# Visual Studio user-specific files
+.vs/
+*.vcxproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+Debug/
+Release/
+x64/
+bin/
+obj/
+
+# Temporary files
+*.log
+*.tlog
+*.lastbuildstate
+*.db
+*.opendb
+*.VC.db
