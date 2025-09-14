@@ -1,4 +1,4 @@
-# Visual Studio user-specific files
+# Visual Studio cache/working files
 .vs/
 *.vcxproj.user
 *.suo
@@ -7,16 +7,28 @@
 *.sln.docstates
 
 # Build results
-Debug/
-Release/
 x64/
 bin/
 obj/
+Debug/
+Release/
+[Bb]uild/
+[Bb]in/
 
-# Temporary files
+# Compiled binaries
+*.exe
+*.dll
+*.lib
+*.pdb
+*.idb
+*.ilk
+*.app
+*.cache
 *.log
-*.tlog
-*.lastbuildstate
+
+# Others
+*.ipch
 *.db
 *.opendb
 *.VC.db
+*.enc

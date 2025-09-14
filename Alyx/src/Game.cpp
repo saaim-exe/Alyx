@@ -2,7 +2,9 @@
 #include "GL.h"
 #include "Input.h"
 #include "Texture.h"
+#include "TexturePaths.h"
 #include "Camera.h"
+#include <unordered_map>
 
 namespace {
 
@@ -11,33 +13,51 @@ namespace {
 	float deltaTime = 0.0f; 
 	float lastFrame = 0.0f; 
 
-	std::string texturePath = "metalbox_full.png"; 
 	GLuint _texID = 0; 
+	GLuint _diffuseTex = 0; 
+	GLuint _specularTex = 0; 
+	GLuint _skyBoxTex = 0; 
 
 }
 
 namespace Game {
 
 	void Init() {
-		camera.Position = glm::vec3(3.75f, 5.0f, 10.3f); 
-		_texID = Texture::loadTexture("res/textures/" + texturePath); 
-		
+		camera.Position = glm::vec3(3.75f, 5.0f, 10.3f);
+
+		// std::unordered_map<std::string, GLuint> textures; 
+
+		_texID = Texture::loadTexture("res/textures/" + TexturePaths::metalbox);
+		_diffuseTex = Texture::loadTexture("res/textures/" + TexturePaths::metalbox_diffuse); 
+		_specularTex = Texture::loadTexture("res/textures/" + TexturePaths::metalbox_specular); 
+
+		// skybox /cubemap 
+
+		std::vector<std::string> faces;
+
+		for (const auto& f : TexturePaths::cubeMapFaces)
+		{
+			faces.push_back("res/textures/skyboxes/Dusk/" + f); 
+		}
+
+		// load!! 
+		_skyBoxTex = Texture::loadCubeMap(faces); 
 	}
 
 
 	void Update() {
 
-		static bool polygonMode = false; 
-		static bool keyPressed = false; 
+		static bool polygonMode = false;
+		static bool keyPressed = false;
 
 
 		float currentFrame = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame; 
+		lastFrame = currentFrame;
 
 		if (Input::keyDown(GLFW_KEY_ESCAPE))
 		{
-			GL::SetWindowShouldClose(true); 
+			GL::SetWindowShouldClose(true);
 		}
 
 		//wireframe mode 
@@ -63,37 +83,37 @@ namespace Game {
 			keyPressed = false;
 		}
 
-		
+
 		if (Input::keyDown(GLFW_KEY_A))
 		{
-			camera.ProcessKeyboard(LEFT, deltaTime); 
+			camera.ProcessKeyboard(LEFT, deltaTime);
 		}
 		if (Input::keyDown(GLFW_KEY_D))
 		{
-			camera.ProcessKeyboard(RIGHT, deltaTime); 
+			camera.ProcessKeyboard(RIGHT, deltaTime);
 		}
 		if (Input::keyDown(GLFW_KEY_W))
 		{
-			camera.ProcessKeyboard(FORWARD, deltaTime); 
+			camera.ProcessKeyboard(FORWARD, deltaTime);
 		}
 		if (Input::keyDown(GLFW_KEY_S))
 		{
-			camera.ProcessKeyboard(BACKWARD, deltaTime); 
+			camera.ProcessKeyboard(BACKWARD, deltaTime);
 		}
 		if (Input::keyDown(GLFW_KEY_SPACE))
 		{
-			camera.ProcessKeyboard(UP, deltaTime); 
+			camera.ProcessKeyboard(UP, deltaTime);
 		}
 		if (Input::keyDown(GLFW_KEY_LEFT_CONTROL))
 		{
-			camera.ProcessKeyboard(DOWN, deltaTime); 
+			camera.ProcessKeyboard(DOWN, deltaTime);
 		}
 		if (Input::keyDown(GLFW_KEY_LEFT_SHIFT) && !Input::keyDown(GLFW_KEY_S))
 		{
-			camera.ProcessKeyboard(BOOST, deltaTime); 
+			camera.ProcessKeyboard(BOOST, deltaTime);
 		}
 
-		view = camera.GetViewMatrix(); 
+		view = camera.GetViewMatrix();
 	}
 
 	glm::mat4 GetViewMatrix() {
@@ -105,7 +125,26 @@ namespace Game {
 	}
 
 	GLuint GetTextureID() {
-		return _texID; 
+		return _texID;
+	}
+
+	GLuint GetDiffuseTex()
+	{
+		return _diffuseTex;
+	}
+	GLuint GetSpecularTex()
+	{
+		return _specularTex;
+	}
+
+	GLuint GetSkyboxTex()
+	{
+		return _skyBoxTex; 
+	}
+
+	glm::vec3 GetCameraPosition()
+	{
+		return camera.Position;
 	}
 
 }

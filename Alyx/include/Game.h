@@ -12,5 +12,9 @@ namespace Game {
 	void Update();
 	Camera& GetCamera();
 	glm::mat4 GetViewMatrix(); 
+	glm::vec3 GetCameraPosition();
+	GLuint GetDiffuseTex();
+	GLuint GetSpecularTex();
+	GLuint GetSkyboxTex();
 	GLuint GetTextureID();
 }

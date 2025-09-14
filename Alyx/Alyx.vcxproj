@@ -152,6 +152,7 @@
     <ClInclude Include="include\Renderer.h" />
     <ClInclude Include="include\Shader.h" />
     <ClInclude Include="include\Texture.h" />
+    <ClInclude Include="include\TexturePaths.h" />
     <ClInclude Include="include\Util.h" />
     <ClInclude Include="vendor\glad\glad.h" />
     <ClInclude Include="vendor\glad\khrplatform.h" />
@@ -328,6 +329,8 @@
     <None Include="res\shaders\cube.vert" />
     <None Include="res\shaders\light.frag" />
     <None Include="res\shaders\light.vert" />
+    <None Include="res\shaders\skybox.frag" />
+    <None Include="res\shaders\skybox.vert" />
     <None Include="vendor\glm\detail\func_common.inl" />
     <None Include="vendor\glm\detail\func_common_simd.inl" />
     <None Include="vendor\glm\detail\func_exponential.inl" />
