@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\1942\source\repos\Alyx\Alyx\vendor\GLFW_build\CMakeFiles\787ec16f2ac0ba38551adc6717d8295f\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{7CA1DAEE-AEC4-3A88-95DA-CF22118172F5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -34,4 +34,10 @@ namespace Util {
 
 	};
 
+
+	struct Texture {
+		unsigned int id; 
+		std::string type; 
+	};
+
 }
