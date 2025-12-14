@@ -1,4 +1,6 @@
 #pragma once
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -8,7 +10,6 @@
 namespace Util {
 
 	std::string ReadTextFromFile(const std::string& path); 
-
 
 	struct Transform {
 
@@ -38,6 +39,7 @@ namespace Util {
 	struct Texture {
 		unsigned int id; 
 		std::string type; 
+		std::string path; 
 	};
 
 }

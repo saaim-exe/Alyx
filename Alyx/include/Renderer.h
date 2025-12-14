@@ -2,12 +2,13 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "Shader.h"
+#include "Model.h"
 #include <iostream>
 #include <vector>
 
 namespace Renderer {
 	
-	extern Shader _cubeShader, _lightShader, _skyBoxShader;
+	extern Shader _cubeShader, _lightShader, _skyBoxShader, _maleModelShader;
 	extern GLuint _cubeVAO, _cubeVBO, _cubeEBO;
 	extern GLuint _lightVAO, _lightVBO, _lightEBO; 
 	extern GLuint _skyBoxVAO, _skyBoxVBO, _skyBoxEBO; 
@@ -16,7 +17,7 @@ namespace Renderer {
 
 	void Init(); 
 	void DrawCube(); 
-	void DrawLight(); 
+	void DrawLight();  
 	void DrawSkybox(); 
 	void RenderFrame(); 
 

@@ -30,15 +30,29 @@ int main() {
 	glfwSetScrollCallback(GL::GetWindowPointer(), Callback::Scroll); 
 	glfwSetInputMode(GL::GetWindowPointer(), GLFW_CURSOR, GLFW_CURSOR_DISABLED); 
 
+	bool printed = false; 
 
 	while (GL::WindowisOpen())
 	{
+
+		if (!printed)
+		{
+
+			std::cout << sizeof(Util::Vertex) << '\n';
+			printed = true; 
+		}
+
+
 		Input::Update(); 
 		Game::Update(); 
 		Renderer::RenderFrame(); 
-
 		GL::SwapBuffersPollEvents(); 
+
+		
 	}
+
+
+
 
 
 	GL::Cleanup(); 

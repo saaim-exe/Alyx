@@ -333,6 +333,8 @@
     <None Include="res\shaders\cube.vert" />
     <None Include="res\shaders\light.frag" />
     <None Include="res\shaders\light.vert" />
+    <None Include="res\shaders\m_male.frag" />
+    <None Include="res\shaders\m_male.vert" />
     <None Include="res\shaders\skybox.frag" />
     <None Include="res\shaders\skybox.vert" />
     <None Include="vendor\glm\detail\func_common.inl" />
@@ -848,6 +850,14 @@
     <None Include="vendor\glm\test\external\gli\gtx\loader_dds9.inl" />
     <None Include="vendor\glm\test\external\gli\gtx\loader_tga.inl" />
     <None Include="vendor\glm\test\external\gli\gtx\wavelet.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\textures\metalbox_full.png" />
+    <Image Include="res\textures\metalbox_full_diffuse.png" />
+    <Image Include="res\textures\metalbox_full_specular.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="vendor\assimp\lib\x64\assimp-vc143-mt.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

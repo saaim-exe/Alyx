@@ -4,19 +4,22 @@
 #include "Texture.h"
 #include "TexturePaths.h"
 #include "Camera.h"
+#include "Model.h"
 #include <unordered_map>
 
 namespace {
 
-	Camera camera; 
-	glm::mat4 view; 
-	float deltaTime = 0.0f; 
-	float lastFrame = 0.0f; 
+	Camera camera;
+	Model model;
 
-	GLuint _texID = 0; 
-	GLuint _diffuseTex = 0; 
-	GLuint _specularTex = 0; 
-	GLuint _skyBoxTex = 0; 
+	glm::mat4 view;
+	float deltaTime = 0.0f;
+	float lastFrame = 0.0f;
+
+	GLuint _texID = 0;
+	GLuint _diffuseTex = 0;
+	GLuint _specularTex = 0;
+	GLuint _skyBoxTex = 0;
 
 }
 
@@ -27,21 +30,31 @@ namespace Game {
 
 		// std::unordered_map<std::string, GLuint> textures; 
 
-		_texID = Texture::loadTexture("res/textures/" + TexturePaths::metalbox);
-		_diffuseTex = Texture::loadTexture("res/textures/" + TexturePaths::metalbox_diffuse); 
-		_specularTex = Texture::loadTexture("res/textures/" + TexturePaths::metalbox_specular); 
+		_texID = TextureProcessing::loadTexture("res/textures/" + TexturePaths::metalbox);
+		_diffuseTex = TextureProcessing::loadTexture("res/textures/" + TexturePaths::metalbox_diffuse);
+		_specularTex = TextureProcessing::loadTexture("res/textures/" + TexturePaths::metalbox_specular);
 
 		// skybox /cubemap 
 
 		std::vector<std::string> faces;
 
-		for (const auto& f : TexturePaths::cubeMapFaces)
+		for (const auto& f : TexturePaths::cubeMapFaces_ClearOcean)
 		{
-			faces.push_back("res/textures/skyboxes/Dusk/" + f); 
+			faces.push_back("res/textures/skyboxes/Clear Ocean/" + f);
 		}
 
+/*		for (const auto& f : TexturePaths::cubeMapFaces_Dusk) {
+			faces.push_back("res/textures/skyboxes/Dusk/" + f); 
+		}*/
+
+
+
 		// load!! 
-		_skyBoxTex = Texture::loadCubeMap(faces); 
+		_skyBoxTex = TextureProcessing::loadCubeMap(faces); 
+
+		// model load (male model) 
+		const std::string male_obj = "Male.OBJ"; 
+		model.Load("res/models/Male/" + male_obj); 
 	}
 
 
@@ -122,6 +135,10 @@ namespace Game {
 
 	Camera& GetCamera() {
 		return camera;
+	}
+
+	Model& GetModel() {
+		return model; 
 	}
 
 	GLuint GetTextureID() {

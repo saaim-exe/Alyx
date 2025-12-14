@@ -12,7 +12,8 @@ using namespace Util;
 namespace {
 	Transform cube;
 	Transform light;
-	Transform normal; 
+	Transform normal;
+	Transform male_model; 
 }
 
 
@@ -20,7 +21,7 @@ namespace {
 namespace Renderer {
 
 
-	Shader _cubeShader, _lightShader, _skyBoxShader;
+	Shader _cubeShader, _lightShader, _skyBoxShader, _maleModelShader;
 	GLuint _cubeVAO = 0, _cubeVBO = 0, _cubeEBO = 0;
 	GLuint _lightVAO = 0, _lightVBO = 0, _lightEBO = 0; 
 	GLuint _skyBoxVAO = 0, _skyBoxVBO = 0, _skyBoxEBO = 0;
@@ -48,11 +49,12 @@ namespace Renderer {
 		_cubeShader.Load("cube.vert", "cube.frag");
 		_lightShader.Load("light.vert", "light.frag"); 
 		_skyBoxShader.Load("skybox.vert", "skybox.frag");
+		_maleModelShader.Load("m_male.vert", "m_male.frag"); 
 	}
 
 	void DrawCube() {
 
-		std::vector<int>  indices = {
+		std::vector<unsigned int>  indices = {
 
 			0, 1, 2, 2, 3, 0,
 				  // Back
@@ -294,7 +296,15 @@ namespace Renderer {
 	}
 
 
+	void DrawMale() {
 
+		
+
+
+
+
+
+	}
 
 
 
@@ -331,6 +341,14 @@ namespace Renderer {
 		//cube.scale = glm::vec3(1);
 		
 
+
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, Game::GetDiffuseTex());
+
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, Game::GetSpecularTex());
+
+
 		for (int i = 0; i < 10; ++i)
 		{
 
@@ -348,15 +366,6 @@ namespace Renderer {
 			DrawCube();
 		}
 		
-
-		
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, Game::GetDiffuseTex());
-
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, Game::GetSpecularTex()); 
-
-
 		_lightShader.Bind();
 		_lightShader.setMat4("projection", Game::GetCamera().GetProjectionMatrix());
 		_lightShader.setMat4("view", Game::GetCamera().GetViewMatrix()); 
@@ -377,20 +386,35 @@ namespace Renderer {
 		glm::mat4 view = glm::mat4(glm::mat3(Game::GetCamera().GetViewMatrix()));
 
 		_skyBoxShader.setMat4("view", view);
-		glActiveTexture(0); 
+		glActiveTexture(GL_TEXTURE0); 
 		glBindTexture(GL_TEXTURE_CUBE_MAP, Game::GetSkyboxTex());
 		DrawSkybox();
 		glDepthMask(GL_TRUE);
-		glDepthMask(GL_LESS); 
+		glDepthFunc(GL_LESS);
 
-		
-		if (Input::keyPressed(GLFW_KEY_H))
+
+		// male model 
+
+		_maleModelShader.Bind();
+		_maleModelShader.setInt("material.diffuse", 0); 
+		_maleModelShader.setInt("material.specular", 1); 
+		_maleModelShader.setMat4("projection", Game::GetCamera().GetProjectionMatrix()); 
+		_maleModelShader.setMat4("view", Game::GetCamera().GetViewMatrix()); 
+		male_model.position = glm::vec3(0.0f, 0.0f, 2.0f); 
+		_maleModelShader.setMat4("model", male_model.to_mat4()); 
+		Game::GetModel().Draw(_maleModelShader); 
+
+
+
+		// THIS DOES NOT WORK [FIX] 
+		if (Input::keyDown(GLFW_KEY_H))
 		{
 			_cubeShader.Load("cube.vert", "cube.frag");
 			_lightShader.Load("light.vert", "light.frag");
+			_skyBoxShader.Load("skybox.vert", "skybox.frag"); 
+			_maleModelShader.Load("m_male.vert", "m_male.frag"); 
 		}
-
-
+		// THIS DOES NOT WORK [FIX] 
 
 	}
 
